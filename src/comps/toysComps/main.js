@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 function Main(props) {
-  let [arr, setArr] = useState([]);
-  useEffect(() => {
-    doApi("https://toys4sale.herokuapp.com/toys?page=2");
-  }, []);
-  const doApi = async (_url) => {
-    let resp = await fetch(_url);
-    let data = await resp.json();
-    console.log(data);
-    setArr(data);
-  };
+  let arr = props.list;
 
   return (
     <main className="container ">
