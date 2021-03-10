@@ -1,15 +1,18 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { URL_API } from "../services/apiSer";
 
 import Header from "./Header";
+import Login from "./login";
 import Main from "./main";
 import NavBar from "./navbar";
+import UserList from "./userList";
 
 function ToysApp(props) {
   let [arr, setArr] = useState([]);
   useEffect(() => {
-    doApi("https://toys4sale.herokuapp.com/toys");
+    doApi(URL_API + "/toys");
   }, []);
   const doApi = async (_url) => {
     let resp = await fetch(_url);
@@ -24,6 +27,13 @@ function ToysApp(props) {
         <NavBar doApi={doApi} />
         <Switch>
           <Route exact path="/" render={() => <Main list={arr} />} />
+          <Route exact path="/login" component={Login} />
+          {/* <Route exact path="/userlist" component={UserList} /> */}
+          <Route
+            exact
+            path="/userlist"
+            render={() => <UserList setArr={setArr} />}
+          />
         </Switch>
       </React.Fragment>
     </Router>
