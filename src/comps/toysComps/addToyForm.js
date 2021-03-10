@@ -25,6 +25,7 @@ function AddToy(props) {
     let data = await doApiMethod(url, "POST", dataBody);
     console.log(data);
     // props.doApii;
+    history.push("/userlist");
 
     if (data._id) {
       alert("toy added");
