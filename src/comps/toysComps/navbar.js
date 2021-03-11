@@ -1,6 +1,6 @@
 import React from "react";
 import { useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../css/style.css";
 import { URL_API } from "../services/apiSer";
 
@@ -27,6 +27,7 @@ function NavBar(props) {
       ? props.doApi(URL_API + `/toys/cat/${sortRef.current.value}`)
       : props.doApi(URL_API + `/toys`);
   };
+
   return (
     <nav className="container bg-warning">
       <div className="container p-3 ">
@@ -58,10 +59,10 @@ function NavBar(props) {
             </div>
           </div>
           <div className="nav col-lg-6 d-flex justify-content-end">
-            <a className="px-3" href="login">
+            <Link className="px-3" to="/login">
               Login
-            </a>
-            <a href="/">Home</a>
+            </Link>
+            <Link to="/">Home</Link>
           </div>
         </div>
       </div>

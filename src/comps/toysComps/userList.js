@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { doApiMethod, URL_API } from "../services/apiSer";
 import AddToy from "./addToyForm";
+import Toy from "./toyElem";
 
 function UserList(props) {
   let history = useHistory();
@@ -12,7 +13,7 @@ function UserList(props) {
       history.push("/login");
     }
     doApi();
-  }, []);
+  }, [props]);
 
   const doApi = async () => {
     let url = URL_API + "/toys/userlist";
@@ -26,32 +27,26 @@ function UserList(props) {
     }
   };
 
-  let func = () => {
+  let deleteItem = async (_itemId) => {
+    let url = URL_API + "/toys/" + _itemId;
+    console.log(url);
+
+    let data = await doApiMethod(url, "DELETE", {});
     doApi();
   };
 
   return (
     // <React.Fragment></React.Fragment>
     <main className="container ">
-      <AddToy doApii={func} />
+      {arr.map && <AddToy />}
       <div className="row">
-        {arr.map((item) => {
-          return (
-            <div className="col-lg-4 p-2">
-              <div className="border overflow-hidden shadow rounded">
-                <img src={item.img_url} className="float-end ms-2 w-100" />
-                <h2 className="p-2">{item.name}</h2>
-                <p className="ps-2">{item.info}</p>
-                <p className="ps-2">{item.price}</p>
-                <p className="ps-2">{item.category}</p>
-                <div className="ps-2">Year: {item.date_created}</div>
-                {/* <Link to={"/info/" + item.imdbID} className="ms-2 btn btn-dark">
-                    More info
-                  </Link> */}
-              </div>
-            </div>
-          );
-        })}
+        {arr.map ? (
+          arr.map((item) => {
+            return <Toy item={item} deleteItem={deleteItem} key={item._id} />;
+          })
+        ) : (
+          <div>You have to login first!!!</div>
+        )}
       </div>
     </main>
   );

@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { doApiMethod, URL_API } from "../services/apiSer";
+import { doApiGet, doApiMethod, URL_API } from "../services/apiSer";
 import { useHistory } from "react-router";
 
-function AddToy(props) {
+function EditToyForm(props) {
   let history = useHistory();
+  // מכיל את הפרמטר שאספנו מהרואט יו אר אל
+  let editid = props.match.params.editId;
+  let [toyData, setToyData] = useState({});
   const { register, handleSubmit, errors } = useForm();
   let nameRef = register({ required: true, minLength: 3 });
   let infoRef = register({ required: true, minLength: 1 });
   let catRef = register({ required: true });
   let imgRef = register({});
   let priceRef = register({ required: true, min: 1 });
+
+  useEffect(() => {
+    getToyDataFromApi();
+  }, []);
+
+  const getToyDataFromApi = async () => {
+    let url = URL_API + "/toys/single/" + editid;
+    let data = await doApiGet(url);
+    setToyData(data);
+    console.log(data);
+  };
 
   const onFormSub = (dataBody) => {
     //dataBody -> מכיל אובייקט עם המאפיינים לפי השמות של האינפוטים והסלקטים
@@ -20,33 +34,28 @@ function AddToy(props) {
   };
 
   const doApi = async (dataBody) => {
-    // if (dataBody.img_url.length == 0) {
-    //   // ימחוק מאפיין אימג מהאובייקט
-    //    delete dataBody.img_url
-    // }
-
-    let url = URL_API + "/toys";
-    let data = await doApiMethod(url, "POST", dataBody);
+    let url = URL_API + "/toys/" + editid;
+    let data = await doApiMethod(url, "PUT", dataBody);
     console.log(data);
-    // props.doApii;
-    history.push("/userlist");
-
-    if (data._id) {
-      alert("toy added");
+    if (data.n == 1) {
+      alert("question updated");
+      history.push("/userlist");
     }
   };
+
   return (
     <div className="container">
       <form
         onSubmit={handleSubmit(onFormSub)}
         className="col-lg-6 mx-auto p-2 shadow mt-3"
       >
-        <h1>Add new Toy</h1>
+        <h1>Edit your Toy</h1>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Name:
           </label>
           <input
+            defaultValue={toyData.name}
             ref={nameRef}
             name="name"
             type="text"
@@ -63,6 +72,7 @@ function AddToy(props) {
             info:
           </label>
           <input
+            defaultValue={toyData.info}
             ref={infoRef}
             name="info"
             type="text"
@@ -79,6 +89,7 @@ function AddToy(props) {
             Category
           </label>
           <select
+            value={toyData.category}
             ref={catRef}
             name="category"
             id="category"
@@ -97,6 +108,7 @@ function AddToy(props) {
             Image url
           </label>
           <input
+            defaultValue={toyData.img_url}
             ref={imgRef}
             name="img_url"
             type="text"
@@ -109,6 +121,7 @@ function AddToy(props) {
             Price:
           </label>
           <input
+            defaultValue={toyData.price}
             ref={priceRef}
             name="price"
             type="number"
@@ -130,4 +143,4 @@ function AddToy(props) {
   );
 }
 
-export default AddToy;
+export default EditToyForm;

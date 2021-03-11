@@ -8,6 +8,7 @@ import Login from "./login";
 import Main from "./main";
 import NavBar from "./navbar";
 import UserList from "./userList";
+import EditToyForm from "./editToyForm";
 
 function ToysApp(props) {
   let [arr, setArr] = useState([]);
@@ -23,17 +24,17 @@ function ToysApp(props) {
   return (
     <Router>
       <React.Fragment>
-        <Header />;
+        <Header />
         <NavBar doApi={doApi} />
         <Switch>
           <Route exact path="/" render={() => <Main list={arr} />} />
           <Route exact path="/login" component={Login} />
-          {/* <Route exact path="/userlist" component={UserList} /> */}
           <Route
             exact
             path="/userlist"
             render={() => <UserList setArr={setArr} />}
           />
+          <Route exact path="/userlist/edit/:editId" component={EditToyForm} />
         </Switch>
       </React.Fragment>
     </Router>
