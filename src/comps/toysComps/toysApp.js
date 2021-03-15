@@ -34,6 +34,7 @@ function ToysApp(props) {
             path="/userlist"
             render={() => <UserList setArr={setArr} />}
           />
+          <Route exact path="/userlist/:pageNum" component={UserList} />
           <Route exact path="/userlist/edit/:editId" component={EditToyForm} />
         </Switch>
       </React.Fragment>

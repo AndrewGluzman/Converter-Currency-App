@@ -26,7 +26,7 @@ function Login(props) {
     console.log(data);
     if (data.token) {
       localStorage.setItem("tok", data.token);
-      history.push("/userList");
+      history.push("/userList/0");
     } else {
       // TODO : show toaste message
       alert("try again , user or password worng");

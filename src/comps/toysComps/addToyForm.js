@@ -29,7 +29,7 @@ function AddToy(props) {
     let data = await doApiMethod(url, "POST", dataBody);
     console.log(data);
     // props.doApii;
-    history.push("/userlist");
+    history.push("/userlist/0");
 
     if (data._id) {
       alert("toy added");
@@ -38,6 +38,7 @@ function AddToy(props) {
   return (
     <div className="container">
       <form
+        style={{ display: props.display }}
         onSubmit={handleSubmit(onFormSub)}
         className="col-lg-6 mx-auto p-2 shadow mt-3"
       >

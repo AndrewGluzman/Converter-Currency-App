@@ -39,7 +39,7 @@ function EditToyForm(props) {
     console.log(data);
     if (data.n == 1) {
       alert("question updated");
-      history.push("/userlist");
+      history.push("/userlist/0");
     }
   };
 
@@ -89,7 +89,7 @@ function EditToyForm(props) {
             Category
           </label>
           <select
-            value={toyData.category}
+            defaultValue={toyData.category}
             ref={catRef}
             name="category"
             id="category"
@@ -136,7 +136,7 @@ function EditToyForm(props) {
           )}
         </div>
         <button type="submit" className="btn btn-primary">
-          Add new Toy!
+          Save
         </button>
       </form>
     </div>
