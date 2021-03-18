@@ -29,7 +29,7 @@ function NavBar(props) {
   };
 
   return (
-    <nav className="container bg-warning">
+    <nav className="container bg-light">
       <div className="container p-3 ">
         <div className="row align-items-center">
           <div className="col-lg-6 row form">
@@ -41,7 +41,7 @@ function NavBar(props) {
                 className="form-control"
                 type="search"
               />
-              <button onClick={onSearchClick} className="btn btn-info">
+              <button onClick={onSearchClick} className="btn btn-info ms-2">
                 Search
               </button>
             </div>

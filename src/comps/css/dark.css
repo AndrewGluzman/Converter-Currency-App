@@ -1,0 +1,29 @@
+.dark_window{
+  position: fixed;
+  width:100%;
+  height: 100%;
+  top:0;
+  left:0;
+  background: rgba(0, 0, 0, 0.692);
+  /* מה יהיה העומק שלו מבחינת שכבות
+  ככל שהמספר גדול יותר ככה השכבה תיהיה עליונה יותר */
+  z-index:999;
+  /* display: flex; */
+  /* כי לא רוצים שיופיע בהתחלה */
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark_box_inside{
+  width:100%;
+  /* אם המסך קטן מרוחב 600 אז הוא יהיה 100 אחוז
+  אם גדול יותר אז הוא יהיה 600 */
+  max-width:400px;
+  background: white;
+  border-radius: 8px;
+  border:2px solid grey;
+  min-height: 250px;
+  margin-left: 600px;
+  position: relative;
+}

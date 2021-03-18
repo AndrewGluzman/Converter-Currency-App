@@ -4,6 +4,7 @@ import { doApiMethod, URL_API } from "../services/apiSer";
 import AddToy from "./addToyForm";
 import Toy from "./toyElem";
 import PageNav from "./pagesNav";
+import "../css/style.css";
 
 function UserList(props) {
   let history = useHistory();
@@ -60,24 +61,25 @@ function UserList(props) {
           <div>You have to login first!!!</div>
         )}
         <div className="col-lg-3 p-2">
-          <div className="border overflow-hidden shadow rounded p-2">
-            <div>
+          <div
+            className="border overflow-hidden shadow rounded p-2 d-flex align-items-center text-center "
+            style={{ height: "440px" }}
+          >
+            <div className=" ">
               <img
                 src="https://snipstock.com/assets/cdn/png/f8ae7b8732fb4b39a99dad8c97fdc664.png"
-                className="float-end ms-2 w-100"
+                className="float-end ms-2 w-100 add-btn"
                 onClick={() => {
                   changeDisplay();
                 }}
               />
-              <h2 className="p-2"></h2>
-              <p className="ps-2"></p>
-              <p className="ps-2"></p>
-              <p className="ps-2"></p>
-              <div className="ps-2">Add new</div>
+              <h2 className="p-2">Add new</h2>
             </div>
           </div>
         </div>
-        {arr.map && <AddToy display={formDisplay} />}
+        {arr.map && (
+          <AddToy display={formDisplay} displayFunc={changeDisplay} />
+        )}
       </div>
     </main>
   );

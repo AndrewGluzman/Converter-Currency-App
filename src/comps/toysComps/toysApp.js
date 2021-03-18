@@ -32,7 +32,7 @@ function ToysApp(props) {
           <Route
             exact
             path="/userlist"
-            render={() => <UserList setArr={setArr} />}
+            render={() => <UserList setArr={setArr} arr={arr} />}
           />
           <Route exact path="/userlist/:pageNum" component={UserList} />
           <Route exact path="/userlist/edit/:editId" component={EditToyForm} />

@@ -17,12 +17,15 @@ function PageNav(props) {
   };
 
   return (
-    <div>
+    <div className="my-3">
       <span>Page:</span>
       {/* [...Array(x)] x מייצג את מספר התאים  */}
       {[...Array(pages)].map((item, i) => {
         return (
-          <Link to={"/userlist/" + i} className="btn btn-dark ms-1">
+          <Link
+            to={"/userlist/" + i}
+            className="btn btn-light rounded-circle px-3 ms-1"
+          >
             {i + 1}
           </Link>
         );

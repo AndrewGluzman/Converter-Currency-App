@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { doApiMethod, URL_API } from "../services/apiSer";
 import { useHistory } from "react-router";
+import "../css/dark.css";
 
 function AddToy(props) {
   let history = useHistory();
@@ -36,11 +37,17 @@ function AddToy(props) {
     }
   };
   return (
-    <div className="container">
+    <div
+      className="container dark_window"
+      style={{ display: props.display }}
+      onClick={() => {
+        props.displayFunc();
+      }}
+    >
       <form
         style={{ display: props.display }}
         onSubmit={handleSubmit(onFormSub)}
-        className="col-lg-6 mx-auto p-2 shadow mt-3"
+        className="add-Form col-lg-6 mx-auto p-2 shadow mt-3 dark_box_inside"
       >
         <h1>Add new Toy</h1>
         <div className="mb-3">
@@ -127,6 +134,14 @@ function AddToy(props) {
           Add new Toy!
         </button>
       </form>
+      <div
+        className="text-center"
+        onClick={() => {
+          props.displayFunc();
+        }}
+      >
+        <p className="text-light mt-2">close</p>
+      </div>
     </div>
   );
 }
