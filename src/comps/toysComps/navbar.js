@@ -1,6 +1,7 @@
 import React from "react";
 import { useRef } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
+
 import "../css/style.css";
 import { URL_API } from "../services/apiSer";
 
@@ -10,6 +11,18 @@ function NavBar(props) {
   let history = useHistory();
   let searchRef = useRef();
   let sortRef = useRef();
+
+  let location = useLocation();
+
+  const logOut = () => {
+    localStorage.removeItem("tok");
+    history.push("/");
+    // addToast("You logged out from system",
+    // {
+    //   appearance: 'warning',
+    //   autoDismiss: true
+    // })
+  };
 
   const onSearchClick = () => {
     history.push("/");
@@ -59,10 +72,18 @@ function NavBar(props) {
             </div>
           </div>
           <div className="nav col-lg-6 d-flex justify-content-end">
-            <Link className="px-3" to="/login">
-              Login
-            </Link>
-            <Link to="/">Home</Link>
+            {location.pathname.includes("/userlist/") ? (
+              <div className="col  text-end">
+                <Link className="mx-2" to="#" onClick={logOut}>
+                  Log out
+                </Link>
+                <Link to="/">Home</Link>
+              </div>
+            ) : (
+              <div className="col mx-3 text-end">
+                <Link to="/login">Log in</Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

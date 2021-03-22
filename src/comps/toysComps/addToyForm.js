@@ -30,7 +30,7 @@ function AddToy(props) {
     let data = await doApiMethod(url, "POST", dataBody);
     console.log(data);
     // props.doApii;
-    history.push("/userlist/0");
+    history.push("/userlist/" + props.page);
 
     if (data._id) {
       alert("toy added");
@@ -40,9 +40,9 @@ function AddToy(props) {
     <div
       className="container dark_window"
       style={{ display: props.display }}
-      onClick={() => {
-        props.displayFunc();
-      }}
+      // onClick={() => {
+      //   props.displayFunc();
+      // }}
     >
       <form
         style={{ display: props.display }}

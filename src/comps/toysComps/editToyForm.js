@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { doApiGet, doApiMethod, URL_API } from "../services/apiSer";
 import { useHistory } from "react-router";
+import "../css/dark.css";
 
 function EditToyForm(props) {
   let history = useHistory();
   // מכיל את הפרמטר שאספנו מהרואט יו אר אל
   let editid = props.match.params.editId;
   let [toyData, setToyData] = useState({});
+  let [formEditDisplay, setFormEditDisplay] = useState("block");
+  let catForm_ar = ["sport", "boys", "girls"];
+
   const { register, handleSubmit, errors } = useForm();
   let nameRef = register({ required: true, minLength: 3 });
   let infoRef = register({ required: true, minLength: 1 });
@@ -42,12 +46,24 @@ function EditToyForm(props) {
       history.push("/userlist/0");
     }
   };
+  const changeDisplay2 = () => {
+    formEditDisplay != "none"
+      ? setFormEditDisplay("none")
+      : setFormEditDisplay("block");
+  };
 
   return (
-    <div className="container">
+    <div
+      className=" dark_window mx-auto"
+      style={{ display: formEditDisplay }}
+      // onClick={() => {
+      //   changeDisplay2();
+      // }}
+    >
       <form
+        style={{ display: formEditDisplay }}
         onSubmit={handleSubmit(onFormSub)}
-        className="col-lg-6 mx-auto p-2 shadow mt-3"
+        className="add-Form col-lg-6 mx-auto p-2 shadow mt-3 dark_box_inside"
       >
         <h1>Edit your Toy</h1>
         <div className="mb-3">
@@ -89,15 +105,25 @@ function EditToyForm(props) {
             Category
           </label>
           <select
-            defaultValue={toyData.category}
             ref={catRef}
             name="category"
             id="category"
             className="form-select"
           >
-            <option value="sport">Sport</option>
+            {/* <option value="sport">Sport</option>
             <option value="boys">Boys</option>
-            <option value="girls">Girls</option>
+            <option value="girls">Girls</option> */}
+            {catForm_ar.map((item, i) => {
+              return (
+                <option
+                  selected={toyData.category == item}
+                  key={i}
+                  value={item}
+                >
+                  {item}
+                </option>
+              );
+            })}
           </select>
           {errors.category && (
             <span className="text-danger">Please choose cateogry</span>
@@ -139,6 +165,14 @@ function EditToyForm(props) {
           Save
         </button>
       </form>
+      <div
+        className="text-center"
+        onClick={() => {
+          changeDisplay2();
+        }}
+      >
+        <p className="text-light mt-2">close</p>
+      </div>
     </div>
   );
 }

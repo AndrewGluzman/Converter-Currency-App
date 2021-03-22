@@ -10,6 +10,7 @@ function UserList(props) {
   let history = useHistory();
   let [arr, setArr] = useState([]);
   let [formDisplay, setFormDisplay] = useState("none");
+  let [page, setPage] = useState(0);
 
   useEffect(() => {
     // בודק בכלל שיש טוקן אצל הצד לקוח
@@ -27,6 +28,9 @@ function UserList(props) {
     let url = !props.match.params.pageNum
       ? URL_API + "/toys/userlist"
       : URL_API + "/toys/limit/5?page=" + props.match.params.pageNum;
+
+    setPage(props.match.params.pageNum);
+    console.log("Page is " + page);
 
     console.log(url);
 

@@ -12,6 +12,7 @@ import EditToyForm from "./editToyForm";
 
 function ToysApp(props) {
   let [arr, setArr] = useState([]);
+  let [page, setPage] = useState(0);
   useEffect(() => {
     doApi(URL_API + "/toys");
   }, []);
@@ -29,13 +30,27 @@ function ToysApp(props) {
         <Switch>
           <Route exact path="/" render={() => <Main list={arr} />} />
           <Route exact path="/login" component={Login} />
-          <Route
+          {/* <Route
             exact
             path="/userlist"
             render={() => <UserList setArr={setArr} arr={arr} />}
-          />
+          /> */}
+          {/* <Route
+            exact
+            path="/userlist/:pageNum"
+            render={() => {
+              <UserList setPage={setPage} />;
+            }}
+          /> */}
           <Route exact path="/userlist/:pageNum" component={UserList} />
           <Route exact path="/userlist/edit/:editId" component={EditToyForm} />
+          {/* <Route
+            exact
+            path="/userlist/edit/:editId"
+            render={() => {
+              <EditToyForm page={page} />;
+            }}
+          /> */}
         </Switch>
       </React.Fragment>
     </Router>

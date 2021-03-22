@@ -6,9 +6,9 @@ function Main(props) {
   return (
     <main className="container ">
       <div className="row">
-        {arr.map((item) => {
+        {arr.map((item, i) => {
           return (
-            <div className=" col-lg-4 p-2">
+            <div key={i} className=" col-lg-4 p-2">
               <div
                 className="  toy border overflow-hidden shadow rounded p-2   "
                 style={{ height: "440px" }}
