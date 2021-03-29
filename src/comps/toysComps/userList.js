@@ -5,6 +5,7 @@ import AddToy from "./addToyForm";
 import Toy from "./toyElem";
 import PageNav from "./pagesNav";
 import "../css/style.css";
+import NavBar from "./navbar";
 
 function UserList(props) {
   let history = useHistory();
@@ -15,7 +16,7 @@ function UserList(props) {
   useEffect(() => {
     // בודק בכלל שיש טוקן אצל הצד לקוח
     if (!localStorage["tok"]) {
-      history.push("/login");
+      history.push("/");
     }
     doApi();
   }, [props]);
@@ -59,7 +60,14 @@ function UserList(props) {
       <div className="row">
         {arr.map ? (
           arr.map((item) => {
-            return <Toy item={item} deleteItem={deleteItem} key={item._id} />;
+            return (
+              <Toy
+                page={page}
+                item={item}
+                deleteItem={deleteItem}
+                key={item._id}
+              />
+            );
           })
         ) : (
           <div>You have to login first!!!</div>

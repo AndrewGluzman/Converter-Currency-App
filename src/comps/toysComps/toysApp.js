@@ -29,28 +29,12 @@ function ToysApp(props) {
         <NavBar doApi={doApi} />
         <Switch>
           <Route exact path="/" render={() => <Main list={arr} />} />
-          <Route exact path="/login" component={Login} />
-          {/* <Route
-            exact
-            path="/userlist"
-            render={() => <UserList setArr={setArr} arr={arr} />}
-          /> */}
-          {/* <Route
-            exact
-            path="/userlist/:pageNum"
-            render={() => {
-              <UserList setPage={setPage} />;
-            }}
-          /> */}
           <Route exact path="/userlist/:pageNum" component={UserList} />
-          <Route exact path="/userlist/edit/:editId" component={EditToyForm} />
-          {/* <Route
+          <Route
             exact
-            path="/userlist/edit/:editId"
-            render={() => {
-              <EditToyForm page={page} />;
-            }}
-          /> */}
+            path="/userlist/edit/:editId/:pageNum"
+            component={EditToyForm}
+          />
         </Switch>
       </React.Fragment>
     </Router>

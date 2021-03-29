@@ -29,7 +29,7 @@ function Toy(props) {
               DELETE
             </button>
             <Link
-              to={"/userlist/edit/" + item._id}
+              to={"/userlist/edit/" + item._id + "/" + props.page}
               className="btn btn-dark ms-2"
             >
               EDIT

@@ -1,7 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+
+import { useEffect } from "react";
+
 import { doApiMethod, URL_API } from "../services/apiSer";
+import "../css/dark.css";
 
 function Login(props) {
   const { register, handleSubmit, errors } = useForm();
@@ -26,7 +31,11 @@ function Login(props) {
     console.log(data);
     if (data.token) {
       localStorage.setItem("tok", data.token);
-      history.push("/userList/0");
+      // <Link to={"/userlist/0"} />;
+
+      props.showLogin();
+
+      history.push("/userlist/0");
     } else {
       // TODO : show toaste message
       alert("try again , user or password worng");
@@ -34,12 +43,12 @@ function Login(props) {
   };
 
   return (
-    <main>
+    <div className="dark_window mx-auto">
       {/* handlesubmit - לא יפעיל את הפונקציה שקיבל כפרמטר
       רק אחרי שאין אפילו טעות אחת */}
       <form
         onSubmit={handleSubmit(onFormSub)}
-        className="col-lg-6 mx-auto p-2 shadow mt-3"
+        className=" col-lg-6 mx-auto p-2 shadow mt-3 dark_box_inside"
       >
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
@@ -79,7 +88,7 @@ function Login(props) {
           Submit
         </button>
       </form>
-    </main>
+    </div>
   );
 }
 

@@ -3,11 +3,13 @@ import { useForm } from "react-hook-form";
 import { doApiGet, doApiMethod, URL_API } from "../services/apiSer";
 import { useHistory } from "react-router";
 import "../css/dark.css";
+import { Link } from "react-router-dom";
 
 function EditToyForm(props) {
   let history = useHistory();
   // מכיל את הפרמטר שאספנו מהרואט יו אר אל
   let editid = props.match.params.editId;
+  let pageNum = props.match.params.pageNum;
   let [toyData, setToyData] = useState({});
   let [formEditDisplay, setFormEditDisplay] = useState("block");
   let catForm_ar = ["sport", "boys", "girls"];
@@ -43,7 +45,7 @@ function EditToyForm(props) {
     console.log(data);
     if (data.n == 1) {
       alert("question updated");
-      history.push("/userlist/0");
+      history.push("/userlist/" + pageNum);
     }
   };
   const changeDisplay2 = () => {
@@ -171,7 +173,9 @@ function EditToyForm(props) {
           changeDisplay2();
         }}
       >
-        <p className="text-light mt-2">close</p>
+        <Link to={"/userlist/" + pageNum} className="text-light mt-2">
+          close
+        </Link>
       </div>
     </div>
   );
