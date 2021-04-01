@@ -1,0 +1,29 @@
+header {
+    background-size: cover;
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.pexels.com/photos/259209/pexels-photo-259209.jpeg');
+  
+    background-position: center;
+    min-height: 300px;
+}
+nav {
+    background-color:rgba(12, 12, 12, 0.925);
+    min-height: 70px;
+}
+
+input, textarea {
+
+    background-color :rgba(29, 28, 28, 0.925);
+    color: white;
+  
+  }
+  select option {
+    margin: 40px;
+    background: rgba(0, 0, 0, 0.747);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    /* filter: invert(1); */
+}
+
+body {
+    background-color: whitesmoke;
+}

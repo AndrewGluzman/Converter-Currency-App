@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../css/style.css";
 
 function Toy(props) {
   let item = props.item;

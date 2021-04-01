@@ -4,7 +4,6 @@ import { doApiMethod, URL_API } from "../services/apiSer";
 import AddToy from "./addToyForm";
 import Toy from "./toyElem";
 import PageNav from "./pagesNav";
-import "../css/style.css";
 import NavBar from "./navbar";
 
 function UserList(props) {

@@ -2,7 +2,6 @@ import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 
-import "../css/style.css";
 import { URL_API } from "../services/apiSer";
 import Login from "./login";
 
