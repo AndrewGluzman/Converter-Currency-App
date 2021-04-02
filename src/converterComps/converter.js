@@ -1,5 +1,7 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
+import { useToasts } from "react-toast-notifications";
+import json from "../converterComps/json/money.json";
 
 function Converter(props) {
   const [coins, setCoins] = useState({
@@ -7,6 +9,8 @@ function Converter(props) {
     secondInp: "",
     quntityInp: 0,
   });
+  let { addToast } = useToasts();
+
   const [curencies, setCurencies] = useState({});
   const [flag, setFlag] = useState(true);
   const [firstRun, setFirstRun] = useState(true);
@@ -21,18 +25,22 @@ function Converter(props) {
   }, [flag]);
 
   const doApi = async () => {
-    let URL =
-      "http://apilayer.net/api/live?access_key=3c81786f9b3d2e267f40d08af97b97f2&currencies=usd,ils,eur,btc,thb";
-    let resp = await fetch(URL);
-    let data = await resp.json();
+    // let URL =
+    //   "http://apilayer.net/api/live?access_key=3c81786f9b3d2e267f40d08af97b97f2&currencies=usd,ils,eur,btc,thb";
+
+    // let resp = await fetch(URL);
+    // let data = await resp.json();
+    let data = json;
     let curencies = data.quotes;
     if (typeof curencies !== "undefined") {
       setCurencies(curencies);
       props.setTime(data.timestamp);
       console.log(data.timestamp);
     } else {
-      // return JSON.parse({ "server id down": "lll" });
-      alert("server is down");
+      addToast("Server is down please try again later", {
+        appearance: "error",
+        autoDismiss: true,
+      });
     }
   };
 
@@ -42,9 +50,12 @@ function Converter(props) {
 
   let calcFunc = () => {
     props.setSign(coins.secondInp);
-    let answear;
     if (coins.firstInp == "" || coins.secondInp == "") {
-      alert("you forgot to choose currencies");
+      // alert("You forgot to choose currencies")
+      addToast("You forgot to choose currencies", {
+        appearance: "error",
+        autoDismiss: true,
+      });
     } else {
       let answear =
         (coins.quntityInp / curencies[coins.firstInp]) *
