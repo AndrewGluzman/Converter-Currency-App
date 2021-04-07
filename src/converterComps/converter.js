@@ -1,7 +1,6 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { useToasts } from "react-toast-notifications";
-import json from "../converterComps/json/money.json";
 
 function Converter(props) {
   const [coins, setCoins] = useState({
@@ -28,9 +27,10 @@ function Converter(props) {
     // let URL =
     //   "http://apilayer.net/api/live?access_key=3c81786f9b3d2e267f40d08af97b97f2&currencies=usd,ils,eur,btc,thb";
 
-    // let resp = await fetch(URL);
-    // let data = await resp.json();
-    let data = json;
+    let URL = "/localJason/money.json";
+    let resp = await fetch(URL);
+    let data = await resp.json();
+    // let data = json;
     let curencies = data.quotes;
     if (typeof curencies !== "undefined") {
       setCurencies(curencies);
